@@ -1,7 +1,7 @@
 /*
  * Configuration for math routines.
  *
- * Copyright (c) 2017-2024, Arm Limited.
+ * Copyright (c) 2017-2025, Arm Limited.
  * SPDX-License-Identifier: MIT OR Apache-2.0 WITH LLVM-exception
  */
 
@@ -69,7 +69,11 @@
 
 /* Optionally used extensions.  */
 #ifdef __GNUC__
-# define HIDDEN __attribute__ ((__visibility__ ("hidden")))
+# if !defined (_WIN32)
+#   define HIDDEN __attribute__ ((__visibility__ ("hidden")))
+# else
+#   define HIDDEN
+# endif
 # define NOINLINE __attribute__ ((noinline))
 # define UNUSED __attribute__ ((unused))
 # define ALIGN(X) __attribute__ ((__aligned__(X)))
